@@ -1,0 +1,44 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+
+  mvc:
+    static-path-pattern: /swagger*
+
+feign:
+  autoconfiguration:
+    jackson:
+      enabled: true
+
+springdoc:
+  #show-actuator: true
+  swagger-ui:
+    tags-sorter: alpha
+
+server:
+  servlet:
+    context-path: /webapp
+---
+spring:
+  config:
+    activate:
+      on-profile: local
+  datasource:
+    driverClassName: org.postgresql.Driver
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/java_spring}
+    username: ${SPRING_DATASOURCE_USERNAME:postgres}
+    password: ${SPRING_DATASOURCE_PASSWORD:31}
+  sql:
+    init:
+      platform: postgres
+  # flyway:
+  #  enabled: false
+  jpa:
+    properties:
+      hibernate:
+        format_sql: true
+    show-sql: true
+server:
+  port: 8080
